@@ -7,12 +7,20 @@ export function caesarEncription(text, shift = 13) {
   const newText = textToConvert.toLowerCase();
   const letters = newText.split("").map((_, i) => newText.charCodeAt(i));
 
-  const lettersEncripted = letters.map((char) => {
+  /* const lettersEncripted = letters.map((char) => {
     if (char > charMin && char < charMax) {
       return ((char - minValue + shift) % 26) + minValue;
     }
     return char;
-  });
+  }); 
 
   return String.fromCharCode(...lettersEncripted);
+  */
+
+  return letters.reduce((acc, cur) => {
+    if (cur > charMin && cur < charMax) {
+      cur = ((cur - minValue + shift) % 26) + minValue;
+    }
+    return (acc += String.fromCharCode(cur));
+  }, "");
 }
